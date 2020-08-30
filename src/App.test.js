@@ -1,12 +1,19 @@
-import {MockedProvider} from "@apollo/client/testing";
+import { MockedProvider } from "@apollo/client/testing";
 import React from "react";
-import App from "./App";
+import App, { ALL_PEOPLE } from "./App";
 import { render } from "@testing-library/react";
 
 describe("App", () => {
-  it("works",() => {
+  it("works", () => {
+    const mocks = [
+      {
+        request: { query: ALL_PEOPLE, variables: {} },
+        result: { data: { people: { id: "1", name: "Buck" } } },
+      },
+    ];
+
     const app = render(
-      <MockedProvider>
+      <MockedProvider mocks={mocks}>
         <App />
       </MockedProvider>
     );
